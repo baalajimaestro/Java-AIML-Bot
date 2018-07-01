@@ -4,7 +4,7 @@ import org.alicebot.ab.utils.*;
 import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.TelegramBotsApi;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
-public class Chatbot extends TelegramLongPollingBot
+public class Chatbot extends TelegramWebhookBot
  {
 	private static final boolean TRACE_MODE = false;
 	static String botName = "super";
