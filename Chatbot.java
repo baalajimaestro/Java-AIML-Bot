@@ -4,10 +4,11 @@ import org.alicebot.ab.utils.*;
 import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.TelegramBotsApi;
+import java.util.*;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
-class Thanos extends TelegramLongPollingBot
+class BotHandler extends TelegramLongPollingBot
  {
 	private static final boolean TRACE_MODE = false;
 	static String botName = "super";
@@ -16,7 +17,7 @@ class Thanos extends TelegramLongPollingBot
 	Bot bot;
 	Chat chatSession;
 	String resourcesPath;
-	public Thanos()
+	public BotHandler()
 	{
 		String resourcesPath = getResourcesPath();
 		bot = new Bot("super", resourcesPath);
@@ -39,9 +40,23 @@ class Thanos extends TelegramLongPollingBot
 		    System.out.println("STATE=" + request + ":THAT=" + ((History) chatSession.thatHistory.get(0)).get(0) + ":TOPIC=" + chatSession.predicates.get("topic"));
 			response = chatSession.multisentenceRespond(request);
 			SendMessage message = new SendMessage().setChatId(chat_id).setText(response);
+			if(request=="/start")
+			{
+				Random randseed=new Random();
+				int briseed=rand.nextInt(5);
+				String[] welcomemsg=new String[5];
+				welcomemsg[0]="Hello, Nice to meet you!"
+				welcomemsg[1]="Hope you enjoy your time chatting with me!";
+				welcomemsg[2]="Some issue with Bot Protocol. Fixing up..............Okay Done!! I must say Hello now!";
+				welcomemsg[3]="Virus Detected! Please uninstall Telegram to continue..... Doing self cleanup.........Done............Virus Eliminated........Yaay!!";
+				welcomemsg[4]="Hello! Mic Testing 1----2----3-----$echo Working";
+				response = welcomemsg[briseed];
+				SendMessage message = new SendMessage().setChatId(chat_id).setText(response);
+			}
 			try {
 				execute(message); 
-			} catch (TelegramApiException e)
+			} 
+			catch (TelegramApiException e)
 		    {
 				e.printStackTrace();
 			}
@@ -76,7 +91,7 @@ class Thanos extends TelegramLongPollingBot
 			TelegramBotsApi botsApi = new TelegramBotsApi();
 			try 
 			{
-				botsApi.registerBot(new Thanos());
+				botsApi.registerBot(new BotHandler);
 			} catch (TelegramApiException e) 
 			{
 				e.printStackTrace();
