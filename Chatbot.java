@@ -64,13 +64,13 @@ class BotHandler extends TelegramLongPollingBot
 	}
 	public String getBotUsername() 
 	{
-        return "baalajimaestro_bot";
+        return BOT_USERNAME;
     }
 
     @Override
 	public String getBotToken()
 	 {
-        return "499214987:AAEuP5ppYgQdGQ9YEGi6xcdcglSMLoDbDuw";
+        return BOT_TOKEN;
 	}
 	private static String getResourcesPath()
 	{
