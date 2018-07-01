@@ -45,7 +45,7 @@ class BotHandler extends TelegramLongPollingBot
 				Random randseed=new Random();
 				int briseed=rand.nextInt(5);
 				String[] welcomemsg=new String[5];
-				welcomemsg[0]="Hello, Nice to meet you!"
+				welcomemsg[0]="Hello, Nice to meet you!";
 				welcomemsg[1]="Hope you enjoy your time chatting with me!";
 				welcomemsg[2]="Some issue with Bot Protocol. Fixing up..............Okay Done!! I must say Hello now!";
 				welcomemsg[3]="Virus Detected! Please uninstall Telegram to continue..... Doing self cleanup.........Done............Virus Eliminated........Yaay!!";
