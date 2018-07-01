@@ -43,7 +43,7 @@ class BotHandler extends TelegramLongPollingBot
 			if(request=="/start")
 			{
 				Random randseed=new Random();
-				int briseed=rand.nextInt(5);
+				int briseed=randseed.nextInt(5);
 				String[] welcomemsg=new String[5];
 				welcomemsg[0]="Hello, Nice to meet you!";
 				welcomemsg[1]="Hope you enjoy your time chatting with me!";
@@ -51,7 +51,7 @@ class BotHandler extends TelegramLongPollingBot
 				welcomemsg[3]="Virus Detected! Please uninstall Telegram to continue..... Doing self cleanup.........Done............Virus Eliminated........Yaay!!";
 				welcomemsg[4]="Hello! Mic Testing 1----2----3-----$echo Working";
 				response = welcomemsg[briseed];
-				SendMessage message = new SendMessage().setChatId(chat_id).setText(response);
+			        message = new SendMessage().setChatId(chat_id).setText(response);
 			}
 			try {
 				execute(message); 
@@ -91,7 +91,7 @@ class BotHandler extends TelegramLongPollingBot
 			TelegramBotsApi botsApi = new TelegramBotsApi();
 			try 
 			{
-				botsApi.registerBot(new BotHandler);
+				botsApi.registerBot(new BotHandler());
 			} catch (TelegramApiException e) 
 			{
 				e.printStackTrace();
