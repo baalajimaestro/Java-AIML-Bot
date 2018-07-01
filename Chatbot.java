@@ -1,10 +1,11 @@
 import java.io.*;
 import org.alicebot.ab.*;
 import org.alicebot.ab.utils.*;
-import javax.swing.*;
-import java.awt.event.*;
-import java.awt.*;
-public class Chatbot extends JFrame implements ActionListener{
+import org.telegram.telegrambots.ApiContextInitializer;
+import org.telegram.telegrambots.TelegramBotsApi;
+import org.telegram.telegrambots.exceptions.TelegramApiException;
+public class Chatbot extends TelegramLongPollingBot
+ {
 	private static final boolean TRACE_MODE = false;
 	static String botName = "super";
 	JButton b;
@@ -15,55 +16,50 @@ public class Chatbot extends JFrame implements ActionListener{
 	Bot bot;
 	Chat chatSession;
 	String resourcesPath;
-public Chatbot()
-{
-	String resourcesPath = getResourcesPath();
-    JPanel p=new JPanel(new GridLayout(3,2,75,75));
-		b=new JButton("Send");
-		l=new JLabel("");
-		l2=new JLabel("You: ");
-		l1=new JLabel("Alice: ");
-		t=new JTextField("");
-		p.add(l1);
-		p.add(l);
-		p.add(l2);
-		p.add(t);
-		p.add(b);
-		setContentPane(p);
-		b.addActionListener(this);
-		bot = new Bot("super", resourcesPath);
-		chatSession = new Chat(bot);
-		bot.brain.nodeStats();
-		MagicBooleans.trace_mode = TRACE_MODE;
-}
-public void actionPerformed(ActionEvent ee)
-{
-	if(ee.getSource()==b)
+	public void onUpdateReceived(Update update) 
 	{
-		textLine = t.getText();
-		System.out.println(textLine);
-		if ((textLine == null) || (textLine.length() < 1))
+		if (update.hasMessage() && update.getMessage().hasText()) 
+		{
+			String textLine = update.getMessage().getText();
+			long chat_id = update.getMessage().getChatId();
+			if ((textLine == null) || (textLine.length() < 1))
 			textLine = MagicStrings.null_input;
-		if (textLine.equals("q")) {
-			bot.writeQuit();
-		} else if (textLine.equals("wq")) {
-			bot.writeQuit();
-			System.exit(0);
-		} else {
 			String request = textLine;
 			if (MagicBooleans.trace_mode)
-				System.out.println("STATE=" + request + ":THAT=" + ((History) chatSession.thatHistory.get(0)).get(0) + ":TOPIC=" + chatSession.predicates.get("topic"));
+		    System.out.println("STATE=" + request + ":THAT=" + ((History) chatSession.thatHistory.get(0)).get(0) + ":TOPIC=" + chatSession.predicates.get("topic"));
 			response = chatSession.multisentenceRespond(request);
-			l.setText(response);
-}
-}
-}
-	public static void main(String[] args)
+			SendMessage message = new SendMessage().setChatId(chat_id).setText(response);
+			try {
+				execute(message); 
+			} catch (TelegramApiException e)
+		    {
+				e.printStackTrace();
+			}
+		}
+	}
+	public String getBotUsername() 
+	{
+        return "baalajimaestro_bot";
+    }
+
+    @Override
+	public String getBotToken()
 	 {
-		 LoginToChatBot cc=new LoginToChatBot();
-		 cc.setSize(500,500);
- 	   cc.setVisible(true);
-     JFrame.setDefaultLookAndFeelDecorated(true);
+        return "499214987:AAEuP5ppYgQdGQ9YEGi6xcdcglSMLoDbDuw";
+    }
+}
+	public static void main(String[] args) 
+	{
+			ApiContextInitializer.init();
+			TelegramBotsApi botsApi = new TelegramBotsApi();
+			try 
+			{
+				botsApi.registerBot(new MyAmazingBot());
+			} catch (TelegramApiException e) 
+			{
+				e.printStackTrace();
+			}
+		}
 	}
 
 	private static String getResourcesPath()
@@ -75,5 +71,4 @@ public void actionPerformed(ActionEvent ee)
 		String resourcesPath = path + File.separator + "src" + File.separator + "main" + File.separator + "resources";
 		return resourcesPath;
 	}
-
 }
