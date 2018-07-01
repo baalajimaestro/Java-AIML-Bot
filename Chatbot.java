@@ -50,6 +50,7 @@ public class Chatbot extends TelegramLongPollingBot
 }
 	public static void main(String[] args) 
 	{
+		        String resourcesPath = getResourcesPath();
 			ApiContextInitializer.init();
 			TelegramBotsApi botsApi = new TelegramBotsApi();
 			try 
