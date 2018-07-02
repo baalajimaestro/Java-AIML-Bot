@@ -9,6 +9,7 @@ import java.util.*;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
+import sun.jvm.hotspot.debugger.posix.elf.ELFSectionHeader;
 class BotHandler extends TelegramLongPollingBot
  {
 	private static final boolean TRACE_MODE = false;
@@ -39,8 +40,7 @@ class BotHandler extends TelegramLongPollingBot
 			///////Just for Log memes :p Disabled by default
 			if (MagicBooleans.trace_mode)
 		    System.out.println("STATE=" + request + ":THAT=" + ((History) chatSession.thatHistory.get(0)).get(0) + ":TOPIC=" + chatSession.predicates.get("topic"));
-			response = chatSession.multisentenceRespond(request);
-			SendMessage message = new SendMessage().setChatId(chat_id).setText(response);
+			
 			if(request.equals("/start"))
 			{
 				Random randseed=new Random();
@@ -52,8 +52,21 @@ class BotHandler extends TelegramLongPollingBot
 				welcomemsg[3]="Virus Detected! Please uninstall Telegram to continue..... Doing self cleanup.........Done............Virus Eliminated........Yaay!!";
 				welcomemsg[4]="Hello! Mic Testing 1----2----3-----$echo Working";
 				response = welcomemsg[briseed];
-				message = new SendMessage().setChatId(chat_id).setText(response);
 			}
+			else if(request.contains("Call")||request.contains("Send message"))
+			{
+				response="Abe jaa na! Yeh to telegram bot hai. Tera google assistant se yeh poocho";
+			}
+			else
+			{
+				response = chatSession.multisentenceRespond(request);
+				if(response.contains("<"))
+				{
+					response="Some Internal Error! Report with screenshot to t.me/baalajimaestro";
+				}
+			}
+			}
+			SendMessage message = new SendMessage().setChatId(chat_id).setText(response);
 			try {
 				execute(message); 
 			} 
