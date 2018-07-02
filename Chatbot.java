@@ -9,7 +9,6 @@ import java.util.*;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
-import sun.jvm.hotspot.debugger.posix.elf.ELFSectionHeader;
 class BotHandler extends TelegramLongPollingBot
  {
 	private static final boolean TRACE_MODE = false;
@@ -25,11 +24,11 @@ class BotHandler extends TelegramLongPollingBot
 		bot = new Bot("super", resourcesPath);
 		chatSession = new Chat(bot);
 		bot.brain.nodeStats();
-		MagicBooleans.trace_mode = TRACE_MODE;
+		MagicBooleans.trace_mode = false;
 	}
-	public void onUpdateReceived(Update update) 
+	public void onUpdateReceived(Update update)
 	{
-		if (update.hasMessage() && update.getMessage().hasText()) 
+		if (update.hasMessage() && update.getMessage().hasText())
 		{
 
 			String textLine = update.getMessage().getText();
@@ -40,7 +39,7 @@ class BotHandler extends TelegramLongPollingBot
 			///////Just for Log memes :p Disabled by default
 			if (MagicBooleans.trace_mode)
 		    System.out.println("STATE=" + request + ":THAT=" + ((History) chatSession.thatHistory.get(0)).get(0) + ":TOPIC=" + chatSession.predicates.get("topic"));
-			
+
 			if(request.equals("/start"))
 			{
 				Random randseed=new Random();
@@ -65,18 +64,17 @@ class BotHandler extends TelegramLongPollingBot
 					response="Some Internal Error! Report with screenshot to t.me/baalajimaestro";
 				}
 			}
-			}
 			SendMessage message = new SendMessage().setChatId(chat_id).setText(response);
 			try {
-				execute(message); 
-			} 
+				execute(message);
+			}
 			catch (TelegramApiException e)
 		    {
 				e.printStackTrace();
 			}
-		}
 	}
-	public String getBotUsername() 
+}
+	public String getBotUsername()
 	{
         return BOT_USERNAME;
     }
@@ -96,17 +94,17 @@ class BotHandler extends TelegramLongPollingBot
 		return resourcesPath;
 	}
  }
- public class Chatbot 
+ public class Chatbot
  {
-	public static void main(String[] args) 
+	public static void main(String[] args)
 	{
-			
+
 		ApiContextInitializer.init();
 			TelegramBotsApi botsApi = new TelegramBotsApi();
-			try 
+			try
 			{
 				botsApi.registerBot(new BotHandler());
-			} catch (TelegramApiException e) 
+			} catch (TelegramApiException e)
 			{
 				e.printStackTrace();
 			}
