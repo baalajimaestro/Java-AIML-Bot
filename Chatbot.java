@@ -2,6 +2,7 @@ import java.io.*;
 import org.alicebot.ab.*;
 import org.alicebot.ab.utils.*;
 import org.telegram.telegrambots.ApiContextInitializer;
+import org.telegram.telegrambots.bots.TelegramWebhookBot;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.TelegramBotsApi;
 import java.util.*;
@@ -40,7 +41,7 @@ class BotHandler extends TelegramLongPollingBot
 		    System.out.println("STATE=" + request + ":THAT=" + ((History) chatSession.thatHistory.get(0)).get(0) + ":TOPIC=" + chatSession.predicates.get("topic"));
 			response = chatSession.multisentenceRespond(request);
 			SendMessage message = new SendMessage().setChatId(chat_id).setText(response);
-			if(request=="/start")
+			if(request.equals("/start"))
 			{
 				Random randseed=new Random();
 				int briseed=randseed.nextInt(5);
@@ -51,7 +52,7 @@ class BotHandler extends TelegramLongPollingBot
 				welcomemsg[3]="Virus Detected! Please uninstall Telegram to continue..... Doing self cleanup.........Done............Virus Eliminated........Yaay!!";
 				welcomemsg[4]="Hello! Mic Testing 1----2----3-----$echo Working";
 				response = welcomemsg[briseed];
-			        message = new SendMessage().setChatId(chat_id).setText(response);
+				message = new SendMessage().setChatId(chat_id).setText(response);
 			}
 			try {
 				execute(message); 
@@ -64,13 +65,13 @@ class BotHandler extends TelegramLongPollingBot
 	}
 	public String getBotUsername() 
 	{
-        return BOT_USERNAME;
+        return "baalajimaestro_bot";
     }
 
     @Override
 	public String getBotToken()
 	 {
-        return BOT_TOKEN;
+        return "499214987:AAEuP5ppYgQdGQ9YEGi6xcdcglSMLoDbDuw";
 	}
 	private static String getResourcesPath()
 	{
@@ -98,5 +99,3 @@ class BotHandler extends TelegramLongPollingBot
 			}
 	}
  }
-
-	
