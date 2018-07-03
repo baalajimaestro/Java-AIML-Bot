@@ -63,7 +63,7 @@ class BotHandler extends TelegramLongPollingBot
 				{
 					response="Some Internal Error! Report with screenshot to t.me/baalajimaestro";
 				}
-				if(response.contains("What do you do")||response.contains("What can you do"))
+				if(response.equals("/cmds"))
 				{
 					response="Just try hitting upon a random chat with me or Type Wordplay, DrawGrid, LuckySlots, Knock Knock, Blackjack, Zbert, Hangman, Horoscope, TicTacToe to play with me. Much more games are inside. Discover them ;)";
 				}
