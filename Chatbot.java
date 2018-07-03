@@ -56,7 +56,7 @@ class BotHandler extends TelegramLongPollingBot
 			{
 				response="Abe jaa na! Yeh to telegram bot hai. Tera google assistant se yeh poocho";
 			}
-			else if(response.equals("/cmds"))
+			else if(request.equals("/cmds"))
 				{
 					response="Just try hitting upon a random chat with me or Type Wordplay, DrawGrid, LuckySlots, Knock Knock, Blackjack, Zbert, Hangman, Horoscope, TicTacToe to play with me. Much more games are inside. Discover them ;)";
 				}
