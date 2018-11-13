@@ -2,6 +2,10 @@
 
 [![License: CC BY-NC-ND 4.0](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-nd/4.0/)
 
+
+## DEVELOPMENT STOPPED ON THIS. IT WAS MEANT TO BE USED AS A COLLEGE PROJECT. YOU CAN STILL CHAT WITH THIS BOT [HERE](t.me/baalajimaestro_bot)
+
+
 First you need to get the library and add it to your project. There are few possibilities for this:
 
 If you use Maven, Gradle, etc; you should be able to import the dependency directly from Maven Central Repository. For example:
